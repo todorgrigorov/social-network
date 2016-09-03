@@ -1,15 +1,15 @@
 (function () {
-  'use strict'
-  
-  var dbConfig = require('./config/db-config'),
-      expressConfig = require('./config/express-config'),
-      death = require('death');
+  'use strict';
 
-  dbConfig.init();
-  expressConfig.init(dbConfig);
+  const _dbConfig = require('./config/db-config'),
+        _expressConfig = require('./config/express-config'),
+        _death = require('death');
 
-  death(function (signal, err) {
-    dbConfig.kill();
+  _dbConfig.init();
+  _expressConfig.init(_dbConfig);
+
+  _death(function (signal, err) {
+    _dbConfig.kill();
     process.exit();
   });
 } ());

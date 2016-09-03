@@ -1,14 +1,11 @@
 angular
     .module('socialNetwork.services')
     .factory('userService', function ($http) {
+        'use strict';
+
         return {
             getUser: function (callback) {
-                $http({
-                    method: 'GET',
-                    url: '/user'
-                }).then(function(res) {
-                    callback(res.data);
-                }); 
+                $http.get('/user').then(res => { callback(res.data); });
             }
         }
     });

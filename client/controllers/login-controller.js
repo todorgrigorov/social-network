@@ -1,7 +1,9 @@
 angular
     .module('socialNetwork.controllers')
     .controller('LoginCtrl', function ($scope, $resource, $http, loginService) {
-        var User = $resource('/api/user'),
+        'use strict';
+
+        let User = $resource('/api/user'),
             Person = $resource('api/person');
 
         // User.query(function (res) {
@@ -25,13 +27,13 @@ angular
         };
 
         $scope.signUp = function () {
-            var user = new User({
+            let user = new User({
                 username: $scope.username,
                 password: $scope.password
             });
 
             user.$save(function (res) {
-                var person = new Person({
+                let person = new Person({
                     email: $scope.email,
                     name: $scope.name,
                     user: res._id

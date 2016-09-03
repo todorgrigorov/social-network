@@ -1,5 +1,7 @@
 (function () {
-    var mongoose = require('mongoose'),
+    'use strict';
+
+    let mongoose = require('mongoose'),
         Schema = mongoose.Schema;
 
     module.exports = mongoose.model('Post', new Schema({

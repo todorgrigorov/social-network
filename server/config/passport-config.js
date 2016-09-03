@@ -1,35 +1,33 @@
 (function () {
-    var passport = require('passport'),
-        passportLocal = require('passport-local'),
-        User = require('../models/user');
+    'use strict';
 
     module.exports = {
         init: function (expressApp, root) {
             _root = root;
-            expressApp.use(passport.initialize());
-            expressApp.use(passport.session());
+            expressApp.use(_passport.initialize());
+            expressApp.use(_passport.session());
             expressApp.post('/login', _authorizationMiddleware);
             expressApp.get('/logout', function (req, res) {
                 req.logout();
                 res.status(200).send('');
             });
-            expressApp.get('/user', function(req, res) {
+            expressApp.get('/user', function (req, res) {
                 res.json(req.user);
             });
 
-            passport.serializeUser(function (user, done) {
+            _passport.serializeUser(function (user, done) {
                 done(null, user.id);
             });
 
-            passport.deserializeUser(function (id, done) {
-                User.findById(id, function (error, user) {
+            _passport.deserializeUser(function (id, done) {
+                _User.findById(id, function (error, user) {
                     done(error, user);
                 });
             });
 
-            passport.use(new passportLocal.Strategy(
+            _passport.use(new _passportLocal.Strategy(
                 function (username, password, done) {
-                    User.findOne({ username: username }, function (error, user) {
+                    _User.findOne({ username: username }, function (error, user) {
                         if (error) {
                             return done(error);
                         } else if (!user || user.password !== password) {
@@ -42,19 +40,23 @@
             ));
         },
         restrict: function (req, res, next) {
-            if (req.isAuthenticated() || req.url === '/login') {
+            let authenticated = req.isAuthenticated();
+
+            if (authenticated || req.url === '/login') {
                 next();
+            } else if (!authenticated && req.url === '/') {
+                res.redirect('/login');
             } else {
-                res.sendFile(_root + '/client/views/unauthorized.html');
+                res.sendFile(`${_root}/client/views/unauthorized.html`);
             }
         },
         getInstance: function () {
-            return passport;
+            return _passport;
         }
     };
 
     function _authorizationMiddleware(req, res, next) {
-        passport.authenticate('local', function (error, user, info) {
+        _passport.authenticate('local', function (error, user, info) {
             if (error) {
                 return next(err);
             } else if (!user) {
@@ -65,11 +67,14 @@
                 if (error) {
                     return next(error);
                 } else {
-                    return res.status(200).send('');
+                    res.json({ id: user.id });
                 }
             });
         })(req, res, next);
     }
 
+    const _passport = require('passport'),
+        _passportLocal = require('passport-local'),
+        _User = require('../models/user');
     var _root = null;
 } ());

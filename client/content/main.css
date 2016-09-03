@@ -19,6 +19,7 @@ body .mdl-layout__header-row {
   margin: auto;
   height: 40px;
   cursor: default;
+  letter-spacing: 1px;
 }
 
 body .mdl-layout.is-small-screen .mdl-layout__header-row h3 {

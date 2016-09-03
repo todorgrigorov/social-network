@@ -1,17 +1,18 @@
 (function () {
-    var mongoose = require('mongoose');
+    'use strict';
 
     module.exports = {
         init: function () {
-            mongoose.connect(_connectionString);
+            _mongoose.connect(_connectionString);
         },
-        getConnection: function() {
-            return mongoose.connection;
+        getConnection: function () {
+            return _mongoose.connection;
         },
         kill: function () {
-            mongoose.connection.close();
+            _mongoose.connection.close();
         }
     };
 
-    var _connectionString = 'mongodb://localhost:27017/social-network';
+    const _connectionString = 'mongodb://localhost:27017/social-network',
+          _mongoose = require('mongoose');
 } ());

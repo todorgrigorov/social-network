@@ -1,50 +1,47 @@
 (function () {
-    var express = require('express'),
-        expressApp = express(),
-        session = require('express-session'),
-        MongoStore = require('connect-mongo').call(this, session),
-        bodyParser = require('body-parser'),
-        CookieParser = require('cookie-parser').call(this),
-        passportConfig = require('./passport-config'),
-        restConfig = require('./rest-config');
+    'use strict';
 
     module.exports = {
         init: function (dbConfig) {
-            expressApp.use(session({
-                store: new MongoStore({ mongooseConnection: dbConfig.getConnection() }),
+            _expressApp.use(_session({
+                store: new _MongoStore({ mongooseConnection: dbConfig.getConnection() }),
                 ttl: 1209600, // 14 days
                 resave: false,
                 saveUninitialized: false,
                 cookie: { path: '/', httpOnly: true, secure: false, maxAge: null },
                 secret: 'secret'
             }));
-            expressApp.use(bodyParser.json());
-            expressApp.use(bodyParser.urlencoded({ extended: true }));
-            expressApp.use(CookieParser);
-            passportConfig.init(expressApp, _root);
-            restConfig.init(expressApp);
-            initRoutes();
+            _expressApp.use(_bodyParser.json());
+            _expressApp.use(_bodyParser.urlencoded({ extended: true }));
+            _expressApp.use(_CookieParser);
+            _passportConfig.init(_expressApp, _root);
+            _restConfig.init(_expressApp);
+            _initRoutes();
 
-            expressApp.listen(_port, function () {
-                console.log('PORT: ' + _port);
-            });
+            _expressApp.listen(_port, () => { console.log(`PORT: ${_port}`); });
         }
     };
 
-    function initRoutes() {
-        expressApp.use('/scripts', express.static(_root + '/node_modules'));
-        expressApp.use('/views', express.static(_root + '/client/views'));
-        expressApp.use('/config', express.static(_root + '/client/config'));
-        expressApp.use('/content', express.static(_root + '/client/content'));
-        expressApp.use('/controllers', express.static(_root + '/client/controllers'));
-        expressApp.use('/directives', express.static(_root + '/client/directives'));
-        expressApp.use('/services', express.static(_root + '/client/services'));
-        expressApp.all('*', passportConfig.restrict);
-        expressApp.get('*', function (req, res, next) {
-            res.sendFile(_root + '/client/index.html');
-        });
+    function _initRoutes() {
+        _expressApp.use('/scripts', _express.static(`${_root}/node_modules`));
+        _expressApp.use('/views', _express.static(`${_root}/client/views`));
+        _expressApp.use('/config', _express.static(`${_root}/client/config`));
+        _expressApp.use('/content', _express.static(`${_root}/client/content`));
+        _expressApp.use('/controllers', _express.static(`${_root}/client/controllers`));
+        _expressApp.use('/directives', _express.static(`${_root}/client/directives`));
+        _expressApp.use('/services', _express.static(`${_root}/client/services`));
+        _expressApp.all('*', _passportConfig.restrict);
+        _expressApp.get('*', (req, res) => { res.sendFile(`${_root}/client/index.html`); });
     }
 
-    var _port = process.env.PORT || 3000,
-        _root = __dirname.replace('\\server\\config', '');;
+    const _express = require('express'),
+          _expressApp = _express(),
+          _session = require('express-session'),
+          _MongoStore = require('connect-mongo').call(this, _session),
+          _bodyParser = require('body-parser'),
+          _CookieParser = require('cookie-parser').call(this),
+          _passportConfig = require('./passport-config'),
+          _restConfig = require('./rest-config'),
+          _port = process.env.PORT || 3000,
+          _root = __dirname.replace('\\server\\config', '');
 } ());

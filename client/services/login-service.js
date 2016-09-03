@@ -1,6 +1,8 @@
 angular
     .module('socialNetwork.services')
     .factory('loginService', function ($http, $location) {
+        'use strict';
+
         return {
             login: function (user) {
                 $http({
@@ -15,7 +17,7 @@ angular
                     }
                 });
             },
-            logout: function() {
+            logout: function () {
                 $http({
                     method: 'GET',
                     url: '/logout'
