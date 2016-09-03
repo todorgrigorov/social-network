@@ -1,0 +1,23 @@
+div.mdl-grid.login-grid {
+    padding-left: 35px;
+}
+
+div.mdl-grid.login-grid div.mdl-card {
+    margin: 20px auto;
+    width: 95%;
+}
+
+div.mdl-grid.login-grid div.mdl-card div.mdl-card__actions button {
+    display: block;
+    margin: 0 auto;
+}
+
+div.mdl-grid.login-grid div.mdl-card div.mdl-textfield {
+    width: 100%;
+}
+
+@media only screen and (max-width: 839px) {
+    div.mdl-grid.login-grid div.signup-form div.mdl-card {
+        margin-left: auto;
+    }
+}

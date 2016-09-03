@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="socialNetwork">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Social Network</title>
+  <base href="/" />
+  <link rel="icon" type="image/png" href="content/images/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="scripts/material-design-lite/material.blue_grey-red.min.css" />
+  <link rel="stylesheet" href="content/main.css">
+  <link rel="stylesheet" href="content/login.css">
+  <script src="scripts/angular/angular.js"></script>
+  <script src="scripts/angular-route/angular-route.js"></script>
+  <script src="scripts/angular-resource/angular-resource.js"></script>
+  <script src="scripts/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="config/angular-config.js"></script>
+</head>
+
+<body class="mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+      </div>
+      <div class="mdl-layout-title mdl-layout__header-row">
+        <h3>SOCIAL NETWORK</h3>
+      </div>
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+      </div>
+    </header>
+    <main class="mdl-layout__content">
+      <ui-view></ui-view>
+      <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer--bottom-section">
+          <div class="mdl-logo">
+            <span>&copy; Social Network&nbsp</span><span current-year></span>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!--CONTROLLERS-->
+  <script src="controllers/login-controller.js"></script>
+  <script src="controllers/tab-controller.js"></script>
+  <script src="controllers/feed-controller.js"></script>
+  <script src="controllers/friends-controller.js"></script>
+  <script src="controllers/me-controller.js"></script>
+
+  <!--DIRECTIVES-->
+  <script src="directives/current-year-directive.js"></script>
+
+  <!--SERVICES-->
+  <script src="services/login-service.js"></script>
+  <script src="services/user-service.js"></script>
+
+  <!--LIB-->
+  <script src="scripts/material-design-lite/material.min.js"></script>
+  <!--<script src="scripts/jquery/dist/jquery.min.js"></script>-->
+</body>
+
+</html>

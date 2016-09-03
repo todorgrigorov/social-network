@@ -1,0 +1,89 @@
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body input, textarea {
+  outline: none;
+}
+
+body textarea {
+  resize: none;
+}
+
+body .mdl-layout__header-row {
+  padding-left: 40px;
+  margin: auto;
+  height: 40px;
+  cursor: default;
+}
+
+body .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
+  font-size: inherit;
+}
+
+body footer.mdl-mega-footer {
+  height: 80px;
+  padding: 1px 40px;
+  cursor: default;
+}
+
+body .mdl-layout__tab-bar-button {
+  display: none;
+}
+
+body .mdl-layout.is-small-screen .mdl-layout__tab-bar .mdl-button {
+  display: none;
+}
+
+body .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar,
+body .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar-container {
+  overflow: visible;
+}
+
+body .mdl-layout__tab-bar-container {
+  height: 64px;
+}
+
+body .mdl-layout__tab-bar {
+  padding: 0;
+  padding-left: 16px;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+body .mdl-layout__tab-bar .mdl-layout__tab {
+  height: 64px;
+  line-height: 64px;
+}
+
+body .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
+  background-color: white;
+  height: 4px;
+}
+
+body main > .mdl-layout__tab-panel {
+  padding: 8px;
+  padding-top: 48px;
+}
+
+body button.mdl-button#addPost {
+  position: absolute;
+  right: 40px;
+  top: 45px;
+  z-index: 999;
+}
+
+@media screen and (max-width: 1024px) {
+    body .mdl-layout__header-row, body footer.mdl-mega-footer {
+      padding-left: 20px;
+    } 
+
+    body footer.mdl-mega-footer {
+      height: 55px;
+    }
+}
